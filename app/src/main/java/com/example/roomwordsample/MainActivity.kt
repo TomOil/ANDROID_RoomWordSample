@@ -3,6 +3,7 @@ package com.example.roomwordsample
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     interface WordDao {          //DAO must be interface or abstract class
 
         @Query("SELECT * FROM word_table ORDER BY word ASC")
-        fun getAlphabetizedWords(): List<Word>  //returns all words as List
+        fun getAlphabetizedWords(): Flow<List<Word>>  //returns all words as List using Flow (async sequence of values)
 
         @Insert(onConflict = OnConflictStrategy.IGNORE)
         suspend fun insert(word: Word)
