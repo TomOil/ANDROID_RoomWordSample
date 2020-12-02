@@ -2,9 +2,7 @@ package com.example.roomwordsample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,5 +20,18 @@ class MainActivity : AppCompatActivity() {
             @ColumnInfo(name = "word") val word: String // name of the column
 
         )
+    }
+
+    @Dao  //identification as DAO class for Room
+    interface WordDao {          //DAO must be interface or abstract class
+
+        @Query("SELECT * FROM word_table ORDER BY word ASC")
+        fun getAlphabetizedWords(): List<Word>  //returns all words as List
+
+        @Insert(onConflict = OnConflictStrategy.IGNORE)
+        suspend fun insert(word: Word)
+
+        @Query("DELETE FROM word_table")
+        suspend fun deleteAll()
     }
 }
