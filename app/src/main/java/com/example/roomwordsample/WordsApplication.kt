@@ -1,4 +1,4 @@
-package com.example.roomwordsample
+package com.example.android.roomwordssample
 
 import android.app.Application
 import kotlinx.coroutines.CoroutineScope

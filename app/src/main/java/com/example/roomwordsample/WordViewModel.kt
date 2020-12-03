@@ -1,7 +1,17 @@
-package com.example.roomwordsample
+package com.example.android.roomwordssample
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import com.example.roomwordsample.Word
 import kotlinx.coroutines.launch
+
+/**
+ * View Model to keep a reference to the word repository and
+ * an up-to-date list of all words.
+ */
 
 class WordViewModel(private val repository: WordRepository) : ViewModel() {
 
